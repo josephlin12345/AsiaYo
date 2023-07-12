@@ -1,4 +1,5 @@
 import json
+import re
 
 from flask import Flask
 from flask_restful import Api, Resource, reqparse
@@ -20,23 +21,19 @@ class Convert(Resource):
     parser.add_argument('amount', required=True, location='args')
     args = parser.parse_args()
 
-    # 確認有source、target幣別，amount有數值
+    # 確認source幣別、target幣別
     if args['source'] not in currencies:
       return { 'msg': '不支援的source幣別' }
     if args['target'] not in currencies[args['source']]:
       return { 'msg': '不支援的target幣別' }
-    if args['amount'] == '':
-      return { 'msg': 'amount不能為空' }
 
-    # 記下幣別符號
-    symbol = args['amount'][0]
-    amount = args['amount'][1:]
-
-    # 去除逗點並轉換
     try:
+      # 分割幣別符號
+      symbol, amount, _ = re.split('(\d+.*)', args['amount'])
+      # 去除逗點並轉換成float
       amount = float(amount.replace(',', ''))
     except ValueError:
-      return { 'msg': '無法將amount正確轉換成float數值' }
+      return { 'msg': 'amount格式須為(幣別符號)+金額' }
     amount *= currencies[args['source']][args['target']]
     amount = f'{symbol}{amount:,.2f}'
 

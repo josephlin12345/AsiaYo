@@ -32,11 +32,9 @@ python 3.6或以上
 
 `{ 'msg': '不支援的source幣別' }` => 參數source幣別不在匯率清單中
 
-`{ 'msg': '不支援的target幣別' }` => 參數target幣別不在匯率清單中
+`{ 'msg': '不支援的target幣別' }` => 參數target幣別不在source對應匯率清單中
 
-`{ 'msg': 'amount不能為空' }` => 參數amount為空字串
-
-`{ 'msg': '無法將amount正確轉換成float數值' }` => 參數amount除了幣別符號以外有不是逗號或數字的字元
+`{ 'msg': 'amount格式須為(幣別符號)+金額' }` => 參數amount格式只能是(幣別符號)+可以包含逗號的金額
 
 # 單元測試說明
 
@@ -58,9 +56,8 @@ python 3.6或以上
     test_convert4 (__main__.TestApi) ... ok
     test_convert5 (__main__.TestApi) ... ok
     test_convert6 (__main__.TestApi) ... ok
-    test_convert7 (__main__.TestApi) ... ok
     
     ----------------------------------------------------------------------
-    Ran 7 tests in 0.007s
+    Ran 6 tests in 0.007s
     
     OK
