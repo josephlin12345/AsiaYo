@@ -30,7 +30,7 @@ python 3.6或以上
 
 **異常回傳說明:**
 
- `{ 'msg': '不支援的source幣別' }` => 參數source幣別不在匯率清單中
+`{ 'msg': '不支援的source幣別' }` => 參數source幣別不在匯率清單中
 
 `{ 'msg': '不支援的target幣別' }` => 參數target幣別不在匯率清單中
 
